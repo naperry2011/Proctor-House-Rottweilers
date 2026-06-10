@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/*
+  Proctor House Rottweilers — design system
+  Palette sampled from the gold engraved-serif logo. "Bold Urban": black + gold,
+  luxury and street at once. Mobile-first; photography is the interface.
+*/
+
+@theme {
+  /* Brand palette (spec §2) */
+  --color-ink: #0b0a08; /* primary background, warm near-black */
+  --color-surface: #141210; /* raised surfaces / cards */
+  --color-surface-2: #1c1916; /* insets, stat blocks */
+  --color-gold-hi: #f3eed1; /* highlight / gradient top */
+  --color-gold: #cfb352; /* core brand color */
+  --color-gold-deep: #664c15; /* gradient base / shadows */
+  --color-mahogany: #4a1e12; /* secondary accent (breed coat) */
+  --color-bone: #f5f1e6; /* primary text on dark */
+  --color-muted: #8c8579; /* secondary text */
+
+  /* Typography */
+  --font-display: var(--font-cinzel); /* heritage serif (engraved caps) */
+  --font-impact: var(--font-anton); /* loud, social-native headlines */
+  --font-sans: var(--font-inter); /* body / UI */
+}
+
+:root {
+  /* Signature gold-metallic gradient — buttons, frames, headline accents */
+  --gold-metallic: linear-gradient(135deg, #f3eed1, #cfb352, #8a6b22);
+}
+
+* {
+  border-color: color-mix(in srgb, var(--color-gold) 18%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Reusable brand utilities --- */
+
+/* Gold metallic fill, applied to text */
+.text-gold-metallic {
+  background: var(--gold-metallic);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gold metallic surface (buttons, frames) */
+.bg-gold-metallic {
+  background: var(--gold-metallic);
+}
+
+/* Engraved Cinzel name plate */
+.font-plate {
+  font-family: var(--font-display), serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Impact headline */
+.font-impact {
+  font-family: var(--font-impact), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+}
+
+/* Scroll-reveal: feed-native motion */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
