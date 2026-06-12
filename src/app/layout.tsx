@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cinzel, Anton, Inter } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -22,6 +22,12 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  // viewport-fit=cover lets the fixed waitlist CTA respect the iOS home indicator
+  viewportFit: "cover",
+  themeColor: "#0b0a08",
+};
 
 export const metadata: Metadata = {
   title: {

@@ -8,7 +8,7 @@ import Link from "next/link";
  */
 export function WaitlistCta() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 p-3 md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] md:hidden">
       <Link
         href="#waitlist"
         className="bg-gold-metallic block rounded-full px-6 py-3.5 text-center text-base font-bold uppercase tracking-wide text-ink shadow-2xl shadow-black/60"

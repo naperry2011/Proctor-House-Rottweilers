@@ -63,7 +63,7 @@ export function Nav() {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-gold/25 text-gold md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-md border border-gold/25 text-gold md:hidden"
         >
           <span className="text-xl leading-none">{open ? "✕" : "☰"}</span>
         </button>

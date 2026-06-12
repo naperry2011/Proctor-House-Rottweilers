@@ -1,0 +1,59 @@
+# Proctor House Rottweilers
+
+> Premium marketing/conversion site for an Arizona Rottweiler breeder ("Designer Gorilla" bloodline) — converts an existing social audience into waitlist applications and deposits.
+
+## Project Overview
+
+**Tech Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · next/font (Cinzel/Anton/Inter)
+**Status:** Phase 1 of 5 complete (static foundation, local-only); Payload CMS/Postgres/R2/Stripe in later phases
+**Purpose:** Paid client project; client is non-technical and will self-manage content via CMS in Phase 2
+
+## Core Documentation
+
+- `README.md` — Setup and getting started (create-next-app default)
+- `proctor-house-rottweilers-website-spec.md` — Client-approved spec; source of truth for scope/phases
+- `CODE_MAP.md` — Feature-to-file map
+- `docs/ai/memory.md` — Project history and current state
+- `docs/ai/roadmap.md` — Forward-looking priorities + client deliverables
+- `docs/ai/tasks.md` — Active work
+- `docs/ai/decisions.md` — Architecture decisions (ADRs)
+- `docs/ai/architecture.md` — System design
+- `ENTRY_POINTS.md` — Where execution starts
+- `DATA_FLOW.md` — System-level data movement
+- `FEATURE_BOUNDARIES.md` — Component responsibilities
+- `IMPORT_GRAPH_SUMMARY.md` — Dependency hot spots
+
+## Key Files by Area
+
+### Data (the CMS seam — most load-bearing module)
+- `src/lib/placeholder-data.ts` — Dog/Litter types, records, brand constants; Phase 2 swaps records for Payload queries, types stay
+
+### Design system
+- `src/app/globals.css` — Tailwind v4 @theme tokens, gold-metallic gradient, font-plate/font-impact utilities
+- `src/app/layout.tsx` — fonts, metadata, chrome composition
+
+### Pages
+- `src/app/page.tsx` — Home (hero → plates → litters → social → #waitlist)
+- `src/app/the-bloodline/page.tsx` — brand centerpiece
+- `src/app/dogs/[slug]/page.tsx` — dog detail (static params from data module)
+- `src/app/about/page.tsx` — story + disabled contact form mockup
+
+### Components
+- `src/components/BloodlinePlate.tsx` — signature gold-framed dog card
+- `src/components/{Nav,Footer,WaitlistCta,Hero,Reveal,SocialEmbed}.tsx`
+
+## Common Tasks
+
+**To run locally:** `npm run dev` (port 3000; `.claude/launch.json` has the preview config)
+**To add/edit a dog:** edit `dogs` in `src/lib/placeholder-data.ts`; detail page and plates update everywhere
+**To verify:** `npx tsc --noEmit && npm run lint && npm run build`
+**Before touching Next.js APIs:** read `node_modules/next/dist/docs/` — this Next version has breaking changes vs. training data (see AGENTS.md)
+
+## Environment Variables
+
+- None in Phase 1. Later: Payload secret, DATABASE_URL (Neon), R2 keys, Stripe keys (client-owned; never handled by the developer — ADR-003)
+
+## Hard Constraints
+
+- Stock dog photos in `public/dogs/` are demo-only; replacing with the client's real dogs is a launch blocker (ADR-004)
+- Mobile is the primary experience; the persistent waitlist CTA must survive all changes

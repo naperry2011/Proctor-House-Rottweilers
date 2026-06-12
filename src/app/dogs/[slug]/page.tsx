@@ -69,7 +69,8 @@ export default async function DogDetailPage({
       {/* Vitals — Anton stat blocks, prominent (reputation is the moat) */}
       <section className="border-b border-gold/15 bg-surface/40">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-gold/10 px-4 py-0 sm:px-6 md:grid-cols-5">
-          <div className="bg-surface px-4 py-5">
+          {/* Full row on phones so the 4 clearances grid 2x2 beneath it */}
+          <div className="col-span-2 bg-surface px-4 py-5 md:col-span-1">
             <p className="text-[0.65rem] uppercase tracking-[0.2em] text-muted">
               Born
             </p>

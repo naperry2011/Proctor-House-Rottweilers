@@ -10,7 +10,8 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-gold/15 bg-surface">
+    // pb-24 on mobile keeps the copyright clear of the fixed waitlist CTA
+    <footer className="border-t border-gold/15 bg-surface pb-24 md:pb-0">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div>
           <p className="font-plate text-gold-metallic text-lg">
