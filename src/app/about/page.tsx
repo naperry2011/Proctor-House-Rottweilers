@@ -5,7 +5,7 @@ import { brand } from "@/lib/placeholder-data";
 export const metadata: Metadata = {
   title: "About & Contact",
   description:
-    "Proctor House Rottweilers — a family Rottweiler breeder in Arizona producing health-tested Designer Gorillas from champion import lines. Get in touch.",
+    "Proctor House Rottweilers — a family Rottweiler breeder in Arizona producing health-tested Designer Gorillas from respected Serbian and European bloodlines. Get in touch.",
 };
 
 const socials = [
@@ -39,12 +39,14 @@ export default function AboutPage() {
             <p>
               Proctor House Rottweilers is a family breeding program in{" "}
               {brand.location}, home of the Designer Gorillas. We raise a limited
-              number of litters from world-champion import lines, with every dog
-              health-tested and every puppy raised underfoot in our home.
+              number of litters from respected Serbian and European bloodlines,
+              with every breeding dog health tested and every puppy raised
+              underfoot in our home.
             </p>
             <p>
               We breed for substance and soundness, and we place carefully —
-              great dogs deserve great homes.
+              great dogs deserve great homes. As we like to put it:{" "}
+              <span className="text-gold">{brand.motto}</span>
             </p>
           </div>
 

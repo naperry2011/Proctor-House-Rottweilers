@@ -7,11 +7,13 @@ import { brand } from "@/lib/placeholder-data";
 const liveLinks = [
   { href: "/", label: "Home" },
   { href: "/the-bloodline", label: "The Bloodline" },
-  { href: "/about", label: "About / Contact" },
+  { href: "/dogs", label: "Our Dogs" },
+  { href: "/shop", label: "Shop" },
+  { href: "/about", label: "About" },
 ];
 
 // Future-phase pages (CMS / forms). Shown but disabled so the IA reads complete.
-const comingSoon = ["Our Dogs", "Available Puppies"];
+const comingSoon = ["Available Puppies"];
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -30,12 +32,12 @@ export function Nav() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-4 md:flex lg:gap-6">
           {liveLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-bone/80 transition-colors hover:text-gold"
+              className="whitespace-nowrap text-sm font-medium text-bone/80 transition-colors hover:text-gold"
             >
               {l.label}
             </Link>
@@ -44,14 +46,14 @@ export function Nav() {
             <span
               key={label}
               title="Coming soon"
-              className="cursor-not-allowed text-sm font-medium text-muted/60"
+              className="hidden cursor-not-allowed whitespace-nowrap text-sm font-medium text-muted/60 lg:block"
             >
               {label}
             </span>
           ))}
           <Link
-            href="#waitlist"
-            className="bg-gold-metallic rounded-full px-4 py-2 text-sm font-bold uppercase tracking-wide text-ink shadow-lg shadow-gold-deep/30 transition-transform hover:scale-[1.03]"
+            href="/#waitlist"
+            className="bg-gold-metallic whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold uppercase tracking-wide text-ink shadow-lg shadow-gold-deep/30 transition-transform hover:scale-[1.03]"
           >
             Join the Waitlist
           </Link>
@@ -101,7 +103,7 @@ export function Nav() {
               Call {brand.phone}
             </a>
             <Link
-              href="#waitlist"
+              href="/#waitlist"
               onClick={() => setOpen(false)}
               className="bg-gold-metallic mt-2 rounded-full px-4 py-3 text-center text-sm font-bold uppercase tracking-wide text-ink"
             >

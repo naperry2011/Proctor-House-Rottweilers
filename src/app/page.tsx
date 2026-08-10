@@ -1,19 +1,26 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { BloodlinePlate } from "@/components/BloodlinePlate";
+import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { SocialEmbed } from "@/components/SocialEmbed";
 import { Reveal } from "@/components/Reveal";
-import { dogs, litters, getDog, brand } from "@/lib/placeholder-data";
+import {
+  brand,
+  foundationDogs,
+  formatDate,
+  litters,
+  type LitterStatus,
+} from "@/lib/placeholder-data";
 
-const statusLabel: Record<string, string> = {
+const statusLabel: Record<LitterStatus, string> = {
   planned: "Planned",
   expected: "Expected",
+  whelped: "Whelped",
   available: "Available Now",
 };
 
 export default function Home() {
-  const featured = dogs.slice(0, 3);
+  const featured = foundationDogs();
 
   return (
     <>
@@ -25,13 +32,13 @@ export default function Home() {
           The pedigree is the moat
         </p>
         <h2 className="font-impact mt-3 max-w-3xl text-3xl text-bone sm:text-5xl">
-          Champion import lines. Health clearances on every dog.
+          Serbian &amp; European bloodlines. Health results on every dog.
         </h2>
         <p className="mt-5 max-w-2xl text-lg text-bone/75">
-          {brand.positioning} — our Rottweilers trace to world-champion European
-          imports, bred for the oversized, blocky structure the line is known for
-          and backed by full OFA health testing. It is what justifies the
-          investment and answers the skeptics.
+          {brand.positioning} — our Rottweilers trace to respected Serbian and
+          European bloodlines, bred for the oversized, blocky structure the line
+          is known for and backed by international FCI/KSS hip and elbow
+          testing. It is what justifies the investment and answers the skeptics.
         </p>
         <Link
           href="/the-bloodline"
@@ -48,14 +55,14 @@ export default function Home() {
             <h2 className="font-impact text-3xl text-bone sm:text-4xl">
               Our Foundation Dogs
             </h2>
-            <span
-              className="hidden text-sm font-medium text-muted sm:block"
-              title="Coming soon"
+            <Link
+              href="/dogs"
+              className="hidden text-sm font-semibold text-gold hover:underline sm:block"
             >
-              Full roster coming soon
-            </span>
+              See all our dogs →
+            </Link>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {featured.map((dog) => (
               <Reveal key={dog.slug} className="h-full">
                 <BloodlinePlate dog={dog} />
@@ -68,49 +75,61 @@ export default function Home() {
       {/* Current / upcoming litters */}
       <Reveal as="section" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
-          <h2 className="font-impact text-3xl text-bone sm:text-4xl">
-            Current &amp; Upcoming Litters
-          </h2>
+          <div>
+            <h2 className="font-impact text-3xl text-bone sm:text-4xl">
+              Our Litters
+            </h2>
+            <p className="mt-3 max-w-2xl text-bone/75">
+              Families who have reserved a puppy get private photo and video
+              updates as their litter grows — ask us for your access code.
+            </p>
+          </div>
+          {/* Placeholder until the client supplies puppy photography. */}
           <div className="relative hidden aspect-[4/3] overflow-hidden rounded-xl ring-1 ring-gold/30 lg:block">
-            <Image
-              src="/dogs/puppy-run.jpg"
-              alt="Rottweiler puppy running on grass"
-              fill
-              sizes="320px"
-              className="object-cover"
-            />
+            <PhotoPlaceholder />
           </div>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {litters.map((litter) => {
-            const sire = getDog(litter.sireSlug);
-            const dam = getDog(litter.damSlug);
-            return (
-              <div
-                key={litter.slug}
-                className="rounded-xl border border-gold/20 bg-surface p-6"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="bg-gold-metallic rounded-full px-3 py-1 font-impact text-xs text-ink">
-                    {statusLabel[litter.status]}
-                  </span>
+          {litters.map((litter) => (
+            <div
+              key={litter.slug}
+              className="rounded-xl border border-gold/20 bg-surface p-6"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <span className="bg-gold-metallic rounded-full px-3 py-1 font-impact text-xs text-ink">
+                  {statusLabel[litter.status]}
+                </span>
+                {litter.whelpDate && (
                   <span className="text-sm text-muted">
-                    Whelp: {litter.whelpDate}
+                    {formatDate(litter.whelpDate)}
                   </span>
-                </div>
-                <p className="font-plate text-gold-metallic mt-4 text-lg">
-                  {sire?.name} × {dam?.name}
-                </p>
-                <p className="mt-2 text-sm text-bone/75">{litter.note}</p>
+                )}
+              </div>
+              <p className="font-plate text-gold-metallic mt-4 text-lg">
+                {litter.name}
+              </p>
+              <p className="mt-1 text-sm text-muted">
+                {litter.sire.name} × {litter.dam.name}
+              </p>
+              <p className="mt-2 text-sm text-bone/75">{litter.note}</p>
+              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
                 <Link
                   href="#waitlist"
-                  className="mt-4 inline-block text-sm font-semibold text-gold hover:underline"
+                  className="text-sm font-semibold text-gold hover:underline"
                 >
                   Reserve a spot on the waitlist →
                 </Link>
+                {litter.updatesEnabled && (
+                  <Link
+                    href={`/litters/${litter.slug}/updates`}
+                    className="text-sm font-semibold text-bone/70 hover:text-gold hover:underline"
+                  >
+                    Buyer updates →
+                  </Link>
+                )}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </Reveal>
 

@@ -21,35 +21,51 @@ export function Footer() {
             {brand.tagline}
           </p>
           <p className="mt-4 text-sm text-muted">{brand.positioning}</p>
+          <p className="mt-4 max-w-xs text-sm italic text-bone/60">
+            &ldquo;{brand.motto}&rdquo;
+          </p>
         </div>
 
         <div className="text-sm">
-          <p className="font-impact text-gold text-lg">Contact</p>
+          <p className="font-impact text-gold text-lg">Explore</p>
+          {/* py-2 keeps these at a ~40px tap target on phones, where most
+              traffic lands. Without it they render ~17px tall. */}
+          <ul className="mt-1">
+            {[
+              { href: "/dogs", label: "Our Dogs" },
+              { href: "/the-bloodline", label: "The Bloodline" },
+              { href: "/shop", label: "Shop" },
+              { href: "/about", label: "About & Contact" },
+            ].map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="block py-2 text-bone/90 hover:text-gold"
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
           <a
             href={brand.phoneHref}
-            className="mt-2 block text-bone/90 hover:text-gold"
+            className="mt-3 block py-2 font-semibold text-gold hover:underline"
           >
             {brand.phone}
           </a>
           <p className="mt-1 text-muted">{brand.location}</p>
-          <Link
-            href="/about"
-            className="mt-3 inline-block text-gold hover:underline"
-          >
-            About &amp; contact form →
-          </Link>
         </div>
 
         <div className="text-sm">
           <p className="font-impact text-gold text-lg">Follow the pack</p>
-          <ul className="mt-2 space-y-1">
+          <ul className="mt-1">
             {socials.map((s) => (
               <li key={s.label}>
                 <a
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-bone/90 hover:text-gold"
+                  className="block py-2 text-bone/90 hover:text-gold"
                 >
                   {s.label}
                 </a>

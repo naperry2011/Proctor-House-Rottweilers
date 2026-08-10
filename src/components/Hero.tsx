@@ -4,19 +4,22 @@ import { brand } from "@/lib/placeholder-data";
 
 /**
  * Full-bleed brand hero (spec §3). Anton impact headline + gold-metallic accent.
- * Photography-as-interface: stock Rottweiler photo until client assets arrive.
+ *
+ * Uses Beauty's wide shot — at 2560x1440 it is the only client asset with the
+ * resolution for a full-bleed 88vh hero. Focal point favours the left-of-centre
+ * subject so the headline column doesn't cover her.
  */
 export function Hero() {
   return (
     <section className="relative flex min-h-[88vh] items-center overflow-hidden">
       {/* Full-bleed hero photo with ink overlays so the headline stays legible */}
       <Image
-        src="/dogs/hero.jpg"
-        alt="Rottweiler head in profile"
+        src="/dogs/beauty-vom-proctor-house/portrait.jpg"
+        alt="Beauty Vom Proctor House standing in the Proctor House run"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[70%_center] opacity-60"
+        className="object-cover object-[62%_center] opacity-60"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-ink/20" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/60" />
@@ -32,8 +35,9 @@ export function Hero() {
           <span className="text-gold-metallic">Bloodline</span>
         </h1>
         <p className="mt-6 max-w-xl text-lg text-bone/80">
-          Large, blocky Rottweilers from world-champion import lines. Health-tested,
-          temperament-true — bred in {brand.location} to be{" "}
+          Large, blocky Rottweilers from respected Serbian and European
+          bloodlines. Health-tested, temperament-true — bred in{" "}
+          {brand.location} to be{" "}
           <span className="font-semibold text-gold">{brand.tagline}</span>.
         </p>
 

@@ -2,11 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PedigreePanel } from "@/components/PedigreePanel";
 import { Reveal } from "@/components/Reveal";
-import { dogs, getDog } from "@/lib/placeholder-data";
+import { VitalsStrip } from "@/components/VitalsStrip";
+import { foundationDogs, getDog } from "@/lib/placeholder-data";
 
+/**
+ * Only foundation dogs get a detail page. Next Generation teasers are named on
+ * /dogs but intentionally 404 here — there is no profile to show yet.
+ */
 export function generateStaticParams() {
-  return dogs.map((dog) => ({ slug: dog.slug }));
+  return foundationDogs().map((dog) => ({ slug: dog.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const dog = getDog((await params).slug);
-  if (!dog) return {};
+  if (!dog || dog.tier !== "foundation") return {};
   return {
     title: dog.name,
     description: `${dog.name} — ${dog.description}`,
@@ -28,28 +34,27 @@ export default async function DogDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const dog = getDog((await params).slug);
-  if (!dog) notFound();
+  if (!dog || dog.tier !== "foundation") notFound();
 
   const firstName = dog.name.split(" ")[0];
-  const stats = [
-    { label: "Hips", value: dog.health.hips },
-    { label: "Elbows", value: dog.health.elbows },
-    { label: "Cardiac", value: dog.health.cardiac },
-    { label: "Eyes", value: dog.health.eyes },
-  ];
+  const hero = dog.photos[0];
+  const gallery = dog.photos.slice(1);
 
   return (
     <>
       {/* Hero — full-bleed portrait with name plate over it */}
       <section className="relative flex min-h-[70vh] items-end overflow-hidden border-b border-gold/15">
-        <Image
-          src={dog.photos[0]}
-          alt={dog.name}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[center_40%]"
-        />
+        {hero && (
+          <Image
+            src={hero.src}
+            alt={hero.alt}
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectPosition: hero.focal }}
+            className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/30" />
         <div className="relative mx-auto w-full max-w-6xl px-4 pb-12 pt-40 sm:px-6">
           <span className="rounded-full bg-ink/80 px-4 py-1.5 font-impact text-sm text-gold">
@@ -58,36 +63,15 @@ export default async function DogDetailPage({
           <h1 className="font-plate text-gold-metallic mt-4 text-4xl sm:text-6xl">
             {dog.name}
           </h1>
-          {dog.titles.length > 0 && (
+          {dog.tagline && (
             <p className="mt-2 text-sm font-medium uppercase tracking-wider text-bone/80">
-              {dog.titles.join(" · ")}
+              {dog.tagline}
             </p>
           )}
         </div>
       </section>
 
-      {/* Vitals — Anton stat blocks, prominent (reputation is the moat) */}
-      <section className="border-b border-gold/15 bg-surface/40">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px bg-gold/10 px-4 py-0 sm:px-6 md:grid-cols-5">
-          {/* Full row on phones so the 4 clearances grid 2x2 beneath it */}
-          <div className="col-span-2 bg-surface px-4 py-5 md:col-span-1">
-            <p className="text-[0.65rem] uppercase tracking-[0.2em] text-muted">
-              Born
-            </p>
-            <p className="font-impact mt-1 text-lg text-bone">
-              {dog.dateOfBirth}
-            </p>
-          </div>
-          {stats.map((s) => (
-            <div key={s.label} className="bg-surface px-4 py-5">
-              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-muted">
-                {s.label}
-              </p>
-              <p className="font-impact mt-1 text-lg text-bone">{s.value}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <VitalsStrip dog={dog} />
 
       {/* Story */}
       <Reveal as="section" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
@@ -103,14 +87,28 @@ export default async function DogDetailPage({
           ))}
         </div>
 
-        <div className="mt-10 rounded-xl border border-gold/20 bg-surface p-6">
-          <p className="font-plate text-gold text-sm tracking-[0.2em]">
-            Pedigree
-          </p>
-          <p className="mt-2 text-bone/80">{dog.pedigree}</p>
-          <p className="mt-3 text-xs text-muted">
-            Full pedigree documentation available on request.
-          </p>
+        {gallery.length > 0 && (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+            {gallery.map((photo) => (
+              <div
+                key={photo.src}
+                className="relative aspect-[4/3] overflow-hidden rounded-xl ring-1 ring-gold/25"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  style={{ objectPosition: photo.focal }}
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-10">
+          <PedigreePanel dog={dog} />
         </div>
       </Reveal>
 
@@ -128,10 +126,10 @@ export default async function DogDetailPage({
               Join the Waitlist
             </Link>
             <Link
-              href="/the-bloodline"
+              href="/dogs"
               className="rounded-full border border-gold/40 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-gold hover:bg-gold/10"
             >
-              Back to the Bloodline
+              See all our dogs
             </Link>
           </div>
         </div>
