@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { HealthCertificate } from "@/components/HealthCertificate";
 import { PedigreePanel } from "@/components/PedigreePanel";
 import { Reveal } from "@/components/Reveal";
 import { VitalsStrip } from "@/components/VitalsStrip";
@@ -107,7 +108,8 @@ export default async function DogDetailPage({
           </div>
         )}
 
-        <div className="mt-10">
+        <div className="mt-10 space-y-6">
+          <HealthCertificate dog={dog} />
           <PedigreePanel dog={dog} />
         </div>
       </Reveal>

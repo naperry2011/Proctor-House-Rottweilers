@@ -125,9 +125,10 @@ into the client's CMS admin.
 
 ---
 
-## ADR-007: Client certificate scans are not published (owner PII)
+## ADR-007: Client certificate scans are published REDACTED
 
-**Date:** 2026-08-09
+**Date:** 2026-08-09 (revised same day — client asked for the certificates to be
+shown; original decision was to withhold them entirely)
 **Status:** Accepted
 
 **Context**
@@ -137,17 +138,29 @@ certified pedigree chart. All four carry the owner's full name, AKC
 registration numbers, and **microchip numbers**.
 
 **Decision**
-Do not publish the scans. Transcribe the non-sensitive content — the grades
-(`A`, `0`), the registry (`AKC`), and the ancestor names — and render it as
-designed UI instead. `/images` is gitignored so the originals stay local. The
-client-authored profile PDFs contain no such identifiers and are published as
-downloads.
+The client wants the certificates visible as proof of health testing, which is
+reasonable — a scanned FCI/KSS certificate answers skeptics in a way a typed "A"
+never will. So we publish them **redacted**:
+
+- Redaction is burned into the pixels before the file reaches `/public`, not
+  applied as a CSS overlay. The published bytes must not contain the data.
+- Painted out: registration number, tattoo/microchip number, owner name, address.
+- Kept: dog name, DOB, sex, breed, x-ray date, the A / 0 classification, the
+  examining vet and clinic, and both stamps — everything that makes it evidence.
+- Rendered by `HealthCertificate.tsx` with a caption stating what was redacted,
+  so black bars read as deliberate rather than suspicious.
+- Only Beauty, Peach and Remi have certificates. Hulk's file was his AKC
+  pedigree chart, which is *not* published — it carries his microchip number and
+  breeder name, and his PDF already states his A/0 result.
+- `/images` stays gitignored; the unredacted originals never leave the machine.
 
 **Consequences**
-- **Positive:** No microchip or registration number is ever exposed. The
-  rendered pedigree panel also looks better than a phone photo of paperwork.
-- **Negative:** Buyers can't see the certificates as proof. If the client wants
-  that, we publish redacted versions — an explicit, separate decision.
+- **Positive:** Buyers get real proof. No identifying number is exposed.
+- **Negative:** Redaction is manual — coordinates live in a scratchpad script,
+  not in the repo. **Anyone regenerating these must redact first and verify by
+  eye.** Never point `healthCertificate` at a raw scan.
+- **Negative:** The examining vet's signature remains visible. Standard for
+  breeder certificates and part of what makes them credible, but noted.
 
 ---
 

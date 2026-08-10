@@ -34,6 +34,10 @@ prototype the buyer update portal for client sign-off.
       string in `litters[]`.
 - [ ] **Confirm Hulk is the only DNA-tested dog** — his is the only Embark
       result in the PDFs, so the other three show "—" under DNA.
+- [ ] **Hulk's FCI/KSS certificate.** Beauty, Peach and Remi each have a scan on
+      their profile now; Hulk has none, so his page shows no Health Testing
+      section even though his PDF states hips A / elbows 0. Ask the client for
+      the scan — it's the odd one out on an otherwise consistent set.
 - [ ] **Confirm Beauty's timeline.** DOB 2024-05-14 and already dam of the Kings
       Litter with two retained males. Chronologically tight; sanity-check before
       it is public.

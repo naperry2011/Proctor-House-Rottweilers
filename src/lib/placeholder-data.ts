@@ -110,6 +110,13 @@ export interface Dog {
   pedigree?: string;
   /** Client-authored profile PDF, /public path. Safe to publish (no PII). */
   pedigreePdf?: string;
+  /**
+   * Scan of the FCI/KSS hip-elbow certificate, shown as proof of testing.
+   * The published file is REDACTED — registration number, microchip number,
+   * owner name and address are burned out of the pixels (ADR-007). If you
+   * ever regenerate these, redact first; never point this at a raw scan.
+   */
+  healthCertificate?: Photo;
   /** One-line summary used on the plate. */
   description: string;
   /** Story paragraphs for the detail page. */
@@ -265,6 +272,10 @@ export const dogs: Dog[] = [
     pedigree:
       "An impressive European pedigree bringing together respected Vom Hause Edelstein and Timit-Tor bloodlines through Xico and Vaina De Yolcris.",
     pedigreePdf: "/pedigrees/beauty-vom-proctor-house.pdf",
+    healthCertificate: {
+      src: "/pedigrees/beauty-vom-proctor-house-fci.jpg",
+      alt: "FCI/KSS hip and elbow certificate for Beauty Vom Proctor House, graded hips A and elbows 0",
+    },
     description:
       "A proven producer — strong structure, substance, a powerful headpiece, and the dam behind our Kings Litter.",
     history: [
@@ -311,6 +322,10 @@ export const dogs: Dog[] = [
     pedigree:
       "Proctor House genetics on her sire's side and respected European bloodlines throughout — a daughter of Hulk carrying forward one of the cornerstone males behind our program.",
     pedigreePdf: "/pedigrees/princess-peach-vom-proctor-house.pdf",
+    healthCertificate: {
+      src: "/pedigrees/princess-peach-vom-proctor-house-fci.jpg",
+      alt: "FCI/KSS hip and elbow certificate for Princess Peach Vom Proctor House, graded hips A and elbows 0",
+    },
     description:
       "Bred and raised here — a homebred daughter of Hulk and the dam behind our Cinema Litter.",
     history: [
@@ -342,6 +357,10 @@ export const dogs: Dog[] = [
     pedigree:
       "Bred from carefully selected bloodlines to continue building on the genetics behind our program.",
     pedigreePdf: "/pedigrees/remi-vom-proctor-house.pdf",
+    healthCertificate: {
+      src: "/pedigrees/remi-vom-proctor-house-fci.jpg",
+      alt: "FCI/KSS hip and elbow certificate for Remi Vom Proctor House, graded hips A and elbows 0",
+    },
     description:
       "The next generation of Proctor House females — heavy bone, a powerful headpiece, and unmistakable presence.",
     history: [
