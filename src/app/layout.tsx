@@ -35,18 +35,18 @@ export const metadata: Metadata = {
     template: `%s · ${brand.name}`,
   },
   description:
-    "Premium Rottweiler puppies from world-champion import lines in Arizona. Health-tested, big blocky Designer Gorillas. Loving Family Protectors — join the waitlist.",
+    "Premium Rottweiler puppies from respected Serbian and European bloodlines in Arizona. FCI/KSS health tested, big blocky Designer Gorillas. Loving Family Protectors — join the waitlist.",
   keywords: [
     "rottweiler puppies Arizona",
     "Rottweiler breeder Arizona",
     "Designer Gorilla Rottweilers",
     "blocky Rottweilers",
-    "champion import Rottweilers",
+    "European bloodline Rottweilers",
   ],
   openGraph: {
     title: `${brand.name} — Designer Gorilla Rottweilers`,
     description:
-      "World-champion import lines. Health-tested, big blocky Rottweilers in Arizona.",
+      "Serbian and European bloodlines. FCI/KSS health tested, big blocky Rottweilers in Arizona.",
     type: "website",
   },
 };

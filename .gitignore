@@ -32,9 +32,15 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# Client-original assets (unoptimized, and the scans contain owner PII —
+# microchip and registration numbers). Optimized, PII-free derivatives are
+# committed under /public. Keep the originals local.
+/images
 
 # typescript
 *.tsbuildinfo

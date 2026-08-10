@@ -1,13 +1,12 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  images: {
-    // Placeholder dog art is SVG; allow the optimizer to serve it. The CSP
-    // sandbox keeps SVGs from executing scripts. Real raster photos arrive later.
-    dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-};
+/**
+ * Nothing to configure yet. Every image is a local /public path, so no
+ * `remotePatterns` are needed; the SVG allowance that used to live here went
+ * away with the placeholder art it existed for.
+ *
+ * Phase 2 (Cloudflare R2) will add `remotePatterns` for the media bucket.
+ */
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

@@ -3,18 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { BloodlinePlate } from "@/components/BloodlinePlate";
 import { Reveal } from "@/components/Reveal";
-import { dogs, brand } from "@/lib/placeholder-data";
+import { foundationDogs, brand } from "@/lib/placeholder-data";
 
 export const metadata: Metadata = {
   title: "The Bloodline",
   description:
-    "The Designer Gorilla bloodline — world-champion European import lines, oversized blocky structure, and full OFA health clearances behind every Proctor House Rottweiler.",
+    "The Designer Gorilla Bloodline — respected Serbian and European pedigrees, oversized blocky structure, and FCI/KSS health testing behind every Proctor House Rottweiler.",
 };
 
 const pillars = [
   {
-    title: "Champion Imports",
-    body: "Our foundation dogs descend directly from titled, world-champion European lines — not pet-store stock. Pedigree depth is the difference.",
+    title: "Pedigrees That Read",
+    body: "Rotco-Roler, Crni Vitez, Timit-Tor, Vom Hause Edelstein. Our dogs trace to respected Serbian and European bloodlines, documented on AKC certified pedigrees.",
   },
   {
     title: "Built Like Gorillas",
@@ -22,7 +22,7 @@ const pillars = [
   },
   {
     title: "Health, Documented",
-    body: "Every breeding dog carries OFA clearances — hips, elbows, cardiac, and eyes. Size never comes at the cost of soundness.",
+    body: "Our breeding dogs carry international FCI/KSS hip and elbow evaluations — and where we have it, Embark DNA screening. Size never comes at the cost of soundness.",
   },
 ];
 
@@ -32,12 +32,12 @@ export default function BloodlinePage() {
       {/* Header */}
       <section className="relative overflow-hidden border-b border-gold/15">
         <Image
-          src="/dogs/closeup.jpg"
+          src="/dogs/hulk-vom-proctor-house/standing.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_30%] opacity-30"
+          className="object-cover object-[center_25%] opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink to-transparent" />
@@ -59,14 +59,14 @@ export default function BloodlinePage() {
       {/* The story */}
       <Reveal as="section" className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
         <h2 className="font-impact text-3xl text-bone sm:text-4xl">
-          From World-Champion Imports
+          Generation After Generation
         </h2>
         <div className="mt-6 space-y-5 text-lg leading-relaxed text-bone/80">
           <p>
             Proctor House began with a simple conviction: if you want
             extraordinary Rottweilers, you start with extraordinary stock. Our
-            foundation dogs were imported from European kennels with championship
-            titles stacked through their pedigrees.
+            foundation dogs are backed by respected Serbian and European
+            bloodlines, documented on AKC certified pedigrees.
           </p>
           <p>
             From there the line was bred toward a clear vision — the oversized,
@@ -74,12 +74,19 @@ export default function BloodlinePage() {
             affectionate, protective temperament that makes a Rottweiler a true{" "}
             <span className="text-gold">Loving Family Protector</span>.
           </p>
+          <p>
+            What separates a bloodline from a series of litters is what you keep.
+            Princess Peach was born here, evaluated here, and brought back into
+            the program as a producer. Out of Beauty&rsquo;s Kings Litter we held
+            back two males rather than sell them. That is the whole idea:{" "}
+            <span className="text-gold">{brand.motto}</span>
+          </p>
           <p className="rounded-lg border border-gold/20 bg-surface p-5 text-base text-bone/75">
             <span className="font-semibold text-gold">A note on size:</span> the
             breed community holds differing views on oversized versus
             breed-standard Rottweilers. This is our established breeding decision
-            — and it is exactly why we keep champion pedigrees and full health
-            clearances front and center. Substance and soundness, together.
+            — and it is exactly why we keep pedigrees and health results front
+            and center. Substance and soundness, together.
           </p>
         </div>
       </Reveal>
@@ -102,14 +109,31 @@ export default function BloodlinePage() {
 
       {/* The dogs */}
       <Reveal as="section" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <h2 className="font-impact text-3xl text-bone sm:text-4xl">
-          The Dogs Behind the Line
-        </h2>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {dogs.map((dog) => (
-            <BloodlinePlate key={dog.slug} dog={dog} />
-          ))}
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="font-impact text-3xl text-bone sm:text-4xl">
+            The Dogs Behind the Line
+          </h2>
+          <Link
+            href="/dogs"
+            className="hidden whitespace-nowrap text-sm font-semibold text-gold hover:underline sm:block"
+          >
+            See all our dogs →
+          </Link>
         </div>
+        {/* Three here, full roster on /dogs — the two pages shouldn't be twins. */}
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {foundationDogs()
+            .slice(0, 3)
+            .map((dog) => (
+              <BloodlinePlate key={dog.slug} dog={dog} />
+            ))}
+        </div>
+        <Link
+          href="/dogs"
+          className="mt-8 inline-block text-sm font-semibold text-gold hover:underline sm:hidden"
+        >
+          See all our dogs →
+        </Link>
       </Reveal>
 
       {/* CTA */}
