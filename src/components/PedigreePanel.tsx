@@ -25,7 +25,7 @@ function ParentCell({ label, parent }: { label: string; parent?: Parent }) {
         parent.slug ? (
           <Link
             href={`/dogs/${parent.slug}`}
-            className="font-plate mt-1 block text-gold hover:underline"
+            className="font-plate mt-1 block py-1.5 text-gold hover:underline"
           >
             {parent.name} →
           </Link>
@@ -68,12 +68,12 @@ export function PedigreePanel({ dog }: { dog: Dog }) {
             (dog.notableLitterSlug ? (
               <Link
                 href={`/litters/${dog.notableLitterSlug}`}
-                className="rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold text-gold hover:bg-gold/10"
+                className="rounded-full border border-gold/40 px-4 py-2.5 text-xs font-semibold text-gold hover:bg-gold/10"
               >
                 {dog.notableProduction} →
               </Link>
             ) : (
-              <span className="rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold text-gold">
+              <span className="rounded-full border border-gold/40 px-4 py-2.5 text-xs font-semibold text-gold">
                 {dog.notableProduction}
               </span>
             ))}

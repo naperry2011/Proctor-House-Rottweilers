@@ -94,7 +94,7 @@ export default async function LitterUpdatesPage({
               <input type="hidden" name="slug" value={slug} />
               <button
                 type="submit"
-                className="rounded-full border border-gold/30 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:text-gold"
+                className="rounded-full border border-gold/30 px-5 py-3 text-xs font-semibold uppercase tracking-wide text-muted transition-colors hover:text-gold"
               >
                 Sign out
               </button>
@@ -189,7 +189,7 @@ export default async function LitterUpdatesPage({
 
           <Link
             href="/"
-            className="mt-8 inline-block text-sm font-semibold text-gold hover:underline"
+            className="mt-6 inline-block py-2 text-sm font-semibold text-gold hover:underline"
           >
             ← Back to Proctor House
           </Link>

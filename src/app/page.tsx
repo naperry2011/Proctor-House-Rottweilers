@@ -42,7 +42,7 @@ export default function Home() {
         </p>
         <Link
           href="/the-bloodline"
-          className="mt-6 inline-block font-semibold text-gold hover:underline"
+          className="mt-4 inline-block py-2 font-semibold text-gold hover:underline"
         >
           Read the bloodline story →
         </Link>
@@ -57,7 +57,7 @@ export default function Home() {
             </h2>
             <Link
               href="/dogs"
-              className="hidden text-sm font-semibold text-gold hover:underline sm:block"
+              className="hidden py-2 text-sm font-semibold text-gold hover:underline sm:block"
             >
               See all our dogs →
             </Link>
@@ -112,17 +112,18 @@ export default function Home() {
                 {litter.sire.name} × {litter.dam.name}
               </p>
               <p className="mt-2 text-sm text-bone/75">{litter.note}</p>
-              <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+              {/* py-2 keeps these at a usable tap size on phones */}
+              <div className="mt-2 flex flex-wrap gap-x-5">
                 <Link
-                  href="#waitlist"
-                  className="text-sm font-semibold text-gold hover:underline"
+                  href="/#waitlist"
+                  className="py-2 text-sm font-semibold text-gold hover:underline"
                 >
                   Reserve a spot on the waitlist →
                 </Link>
                 {litter.updatesEnabled && (
                   <Link
                     href={`/litters/${litter.slug}/updates`}
-                    className="text-sm font-semibold text-bone/70 hover:text-gold hover:underline"
+                    className="py-2 text-sm font-semibold text-bone/70 hover:text-gold hover:underline"
                   >
                     Buyer updates →
                   </Link>

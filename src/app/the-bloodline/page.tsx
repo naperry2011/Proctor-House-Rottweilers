@@ -115,7 +115,7 @@ export default function BloodlinePage() {
           </h2>
           <Link
             href="/dogs"
-            className="hidden whitespace-nowrap text-sm font-semibold text-gold hover:underline sm:block"
+            className="hidden whitespace-nowrap py-2 text-sm font-semibold text-gold hover:underline sm:block"
           >
             See all our dogs →
           </Link>
@@ -130,7 +130,7 @@ export default function BloodlinePage() {
         </div>
         <Link
           href="/dogs"
-          className="mt-8 inline-block text-sm font-semibold text-gold hover:underline sm:hidden"
+          className="mt-6 inline-block py-2 text-sm font-semibold text-gold hover:underline sm:hidden"
         >
           See all our dogs →
         </Link>
