@@ -4,22 +4,39 @@ Active work. Update as items are completed and new work is identified.
 
 ## Sprint / Iteration
 
-**Range:** 2026-08-09 (Phase 1.5 — real roster, merch, buyer portal)
+**Range:** 2026-08-09 (Phase 1.5 — real roster, merch, buyer portal) — shipped
 **Goal:** Get the client's actual dogs on the site, add a merch surface, and
 prototype the buyer update portal for client sign-off.
+**State at close:** `main` @ d121d95, deployed to Vercel production, env vars set.
+tsc / eslint / build all clean.
 
 ## In Progress
 
-- (none)
+- (none — clean stopping point)
+
+## Start here next session
+
+1. [ ] **Turn off Vercel Authentication** (Settings → Deployment Protection), or
+       switch it to Password Protection. Until this is done the client cannot
+       open the site at all — everything else is blocked behind it.
+2. [ ] **Smoke-test production once it's public:** open
+       `/litters/the-cinema-litter/updates`, confirm the passcode form appears
+       (not "aren't switched on yet" — that would mean the secret didn't take),
+       then unlock with the real code.
+3. [ ] **Send the client email.** Draft is in the session transcript; covers the
+       real dogs, the shop, the portal, the redacted certificates, and the asset
+       asks. Do NOT include passcodes in the email.
+4. [ ] **Walk the client through the portal concept** and the ADR-008 caveats
+       before any real buyer gets a code.
 
 ## Up Next
 
-- [ ] Deploy to Vercel for client review — client sets `LITTER_ACCESS_SECRET`
-      and the `LITTER_PASSCODE_*` vars (see `.env.example`); we never handle
-      their credentials (ADR-003)
-- [ ] Walk the client through the buyer portal concept + the security caveats
-      in ADR-008 before it goes in front of any buyer
-- [ ] Phase 2 kickoff: Payload CMS + Neon Postgres + R2
+- [ ] Chase the photography gap (see Blocked) — it is the biggest visible
+      weakness and blocks nothing else technically
+- [ ] Phase 2 kickoff: Payload CMS + Neon Postgres + R2. Confirm litter cadence
+      first — if the client runs more than ~2 litters a year, pull Payload
+      forward instead of adding more `LITTER_PASSCODE_*` env vars (ADR-008)
+- [ ] Rewrite `README.md` — still the create-next-app default
 
 ## Blocked — need from client
 
