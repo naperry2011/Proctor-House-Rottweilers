@@ -50,9 +50,42 @@ function sha256(value: string): Buffer {
   return createHmac("sha256", "phr-digest").update(value).digest();
 }
 
+/**
+ * The cookie signing key, or undefined if it is missing or obviously wrong.
+ *
+ * The shape checks exist because the failure they catch is SILENT: any string
+ * over 16 chars would sign cookies happily, so a bad value produces a working
+ * portal with a worthless key and nothing to indicate it. In particular the
+ * generator command is published in .env.example, so pasting the command
+ * instead of its output would make the signing key public.
+ *
+ * Returning undefined fails closed — the page renders "not switched on yet"
+ * rather than granting access with a compromised key.
+ */
 function secret(): string | undefined {
   const s = process.env.LITTER_ACCESS_SECRET;
-  return s && s.length >= 16 ? s : undefined;
+  if (!s) return undefined;
+
+  const reason =
+    s.length < 32
+      ? "shorter than 32 characters"
+      : /\s/.test(s)
+        ? "contains whitespace"
+        : /randomBytes|console\.log|node\s/.test(s)
+          ? "looks like the generator command rather than its output"
+          : undefined;
+
+  if (reason) {
+    // Server-only; never reaches the browser.
+    console.error(
+      `[litter-access] LITTER_ACCESS_SECRET is unusable (${reason}). ` +
+        "Generate one with: node -e \"console.log(require('crypto').randomBytes(32).toString('base64url'))\" " +
+        "and set the OUTPUT (~43 chars, no spaces). Litter updates stay locked until this is fixed.",
+    );
+    return undefined;
+  }
+
+  return s;
 }
 
 /**
