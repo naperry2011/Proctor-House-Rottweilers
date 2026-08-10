@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Dog, Parent } from "@/lib/placeholder-data";
 
@@ -96,6 +97,45 @@ export function PedigreePanel({ dog }: { dog: Dog }) {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* AKC certified pedigree chart, redacted — see ADR-007 */}
+      {dog.pedigreeImage && (
+        <div className="mt-6">
+          <p className="text-[0.65rem] uppercase tracking-[0.2em] text-muted">
+            AKC certified pedigree
+          </p>
+          <a
+            href={dog.pedigreeImage.src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 block overflow-hidden rounded-lg ring-1 ring-gold/30 transition hover:ring-gold/60"
+          >
+            <div className="relative aspect-[4/3] bg-bone">
+              <Image
+                src={dog.pedigreeImage.src}
+                alt={dog.pedigreeImage.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="object-contain"
+              />
+            </div>
+          </a>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <p className="text-xs text-muted">
+              Microchip number and personal contact details are redacted for
+              privacy.
+            </p>
+            <a
+              href={dog.pedigreeImage.src}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whitespace-nowrap py-1 text-xs font-semibold text-gold hover:underline"
+            >
+              View full size →
+            </a>
+          </div>
         </div>
       )}
 

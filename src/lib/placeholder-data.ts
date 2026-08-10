@@ -111,6 +111,14 @@ export interface Dog {
   /** Client-authored profile PDF, /public path. Safe to publish (no PII). */
   pedigreePdf?: string;
   /**
+   * Scan of the AKC certified pedigree chart. Like healthCertificate, the
+   * published file is REDACTED in the pixels — microchip number and the
+   * breeder's personal name are painted out (ADR-007). Ancestor registration
+   * numbers are left: those are public stud-book data and removing them would
+   * gut the document.
+   */
+  pedigreeImage?: Photo;
+  /**
    * Scan of the FCI/KSS hip-elbow certificate, shown as proof of testing.
    * The published file is REDACTED — registration number, microchip number,
    * owner name and address are burned out of the pixels (ADR-007). If you
@@ -230,6 +238,10 @@ export const dogs: Dog[] = [
     pedigree:
       "American-bred and backed by strong Serbian and European bloodlines, Hulk's AKC certified pedigree stacks Rotco-Roler, Crni Vitez, Timit-Tor and Vom Hause Edelstein lines on both sides.",
     pedigreePdf: "/pedigrees/hulk-vom-proctor-house.pdf",
+    pedigreeImage: {
+      src: "/pedigrees/hulk-vom-proctor-house-akc-pedigree.jpg",
+      alt: "AKC certified pedigree for Hulk Vom Proctor House, showing four generations of Rotco-Roler, Crni Vitez and Timit-Tor lines",
+    },
     description:
       "A cornerstone male of the Designer Gorilla Bloodline — powerful structure, heavy bone, and an impressive headpiece.",
     history: [
